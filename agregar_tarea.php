@@ -9,18 +9,6 @@
     <h1>Agregar Nueva Tarea</h1>
 
     <?php
-    // Función para cargar tareas desde el archivo de texto
-    function cargarTareas($archivo) {
-        $tareas = [];
-
-        if (file_exists($archivo)) {
-            $contenido = file_get_contents($archivo);
-            $tareas = unserialize($contenido);
-        }
-
-        return $tareas;
-    }
-
     // Función para guardar tareas en el archivo de texto
     function guardarTareas($tareas, $archivo) {
         file_put_contents($archivo, serialize($tareas));
@@ -35,7 +23,12 @@
         $nombreTarea = $_POST["nombre_tarea"];
 
         // Cargar tareas existentes
-        $tareas = cargarTareas($archivoTareas);
+        $tareas = [];
+
+        if (file_exists($archivoTareas)) {
+            $contenido = file_get_contents($archivoTareas);
+            $tareas = unserialize($contenido);
+        }
 
         // Agregar la nueva tarea
         $tareas[] = array("nombre" => $nombreTarea, "completada" => false);

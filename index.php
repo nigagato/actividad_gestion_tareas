@@ -21,11 +21,6 @@
         return $tareas;
     }
 
-    // Función para guardar tareas en el archivo de texto
-    function guardarTareas($tareas, $archivo) {
-        file_put_contents($archivo, serialize($tareas));
-    }
-
     // Ruta al archivo de texto donde se almacenarán las tareas
     $archivoTareas = "tareas.txt";
 
@@ -34,19 +29,21 @@
     $tareasPendientes = [];
     $tareasCompletadas = [];
 
-    foreach ($tareas as $tarea) {
+    foreach ($tareas as $id => $tarea) {
         if ($tarea['completada']) {
             $tareasCompletadas[] = $tarea;
         } else {
-            $tareasPendientes[] = $tarea;
+            $tareasPendientes[$id] = $tarea;
         }
     }
     ?>
 
     <h2>Tareas Pendientes</h2>
     <ul>
-        <?php foreach ($tareasPendientes as $tarea): ?>
-            <li><?php echo $tarea['nombre']; ?></li>
+        <?php foreach ($tareasPendientes as $id => $tarea): ?>
+            <li>
+                <?php echo $tarea['nombre']; ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 
@@ -58,6 +55,8 @@
     </ul>
 
     <a href="agregar_tarea.php">Agregar Nueva Tarea</a>
+    <br>
+    <a href="completar.php">Completar tareas</a>
 
 </body>
 </html>
