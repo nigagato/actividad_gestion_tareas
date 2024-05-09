@@ -1,13 +1,5 @@
 <?php
-$archivoTareas = "tareas.txt";
-
-if (!file_exists($archivoTareas)) {
-    $file = fopen($archivoTareas, "w") or die("No se pudo crear el archivo tareas.txt");
-    fclose($file);
-    echo "Archivo tareas.txt creado exitosamente.";
-} else {
-    echo "El archivo tareas.txt ya existe.";
-}
+require_once("init.php");
 ?>
 
 <!DOCTYPE html>
@@ -78,4 +70,5 @@ if (!file_exists($archivoTareas)) {
         </div>
     </div>
 </body>
+
 </html>
