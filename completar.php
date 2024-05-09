@@ -49,25 +49,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tareas_completadas"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Completar Tareas</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Completar Tareas</h1>
+    <div class="container">
+        <h1>Completar Tareas</h1>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <h2>Tareas Pendientes</h2>
-        <ul>
-            <?php 
-            $tareasPendientes = cargarTareas($archivoTareas);
-            foreach ($tareasPendientes as $id => $tarea): 
-                if (!$tarea['completada']): ?>
-                <li>
-                    <input type="checkbox" name="tareas_completadas[]" value="<?php echo $id; ?>" onchange="this.form.submit()" />
-                    <?php echo $tarea['nombre']; ?>
-                </li>
-            <?php endif; endforeach; ?>
-        </ul>
-    </form>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <h2>Tareas Pendientes</h2>
+            <ul>
+                <?php 
+                $tareasPendientes = cargarTareas($archivoTareas);
+                foreach ($tareasPendientes as $id => $tarea): 
+                    if (!$tarea['completada']): ?>
+                    <li>
+                        <input type="checkbox" name="tareas_completadas[]" value="<?php echo $id; ?>" onchange="this.form.submit()" />
+                        <?php echo $tarea['nombre']; ?>
+                    </li>
+                <?php endif; endforeach; ?>
+            </ul>
+        </form>
 
-    <a href="index.php">Volver a la Lista de Tareas</a>
+        <a href="index.php">Volver a la Lista de Tareas</a>
+    </div>
 </body>
 </html>
